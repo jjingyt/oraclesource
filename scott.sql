@@ -2120,4 +2120,90 @@ WHERE HIREDATE > (SELECT MIN(HIREDATE) FROM exam_emp WHERE DEPTNO=60);
 DELETE FROM EXAM_EMP WHERE EMPNO IN (SELECT EMPNO FROM EXAM_EMP, SALGRADE WHERE SAL BETWEEN LOSAL AND HISAL)
 
 
+--DDL(데이터 정의어)
+--객체를 생성,변경,삭제
+-- 실행하면 반영됨
+
+-- create(생성), alter(변경) , drop(삭제)
+-- create table 테이블이름(
+--  필드명1 자료형,
+--  필드명2 자료형,
+--)
+-- 테이블 이름 규칙
+-- 문자로시작
+-- 같은 사용자 안에서 동일한 테이블 명 사용불가
+-- sql 키워드는 테이블 이름으로 사용할수 없음
+
+-- 필드명 생성 규칙
+-- 문자로 시작
+-- 열이름은 중복되면 안됨
+-- sql 키워드 사용불가
+
+-- 자료형:숫자 Numver, 문자 varchar2, 날짜 date
+
+create table EMP_DDL(
+    EMPNO NUMBER(4),
+    ENAME VARCHAR2(10),
+    JOB VARCHAR2(9),
+    MGR NUMBER(4),
+    HIREDATE DATE,
+    SAL NUMBER(7,2), -- 숫자로 7자리 허용(소수점 2자리 허용)
+    COMM NUMBER(7,2),
+    DEPTNO NUMBER(2)
+);
+
+desc emp_ddl;
+
+drop table emp_ddl;
+
+create table dept_ddl as select * from dept;
+
+create table dept_ddl as select * from dept where deptno=30;
+
+create table dept_ddl2 as select * from dept where 1<>1;
+select * from dept_ddl2;
+
+--ALTER
+-- 이미 생성된 객체를 변경
+
+CREATE TABLE EMP_ALTER AS SELECT * FROM  EMP;
+
+-- 새로운 컬럼 (열) 추가: ADD
+DESC EMP_ALTER;
+
+ALTER TABLE EMP_ALTER ADD HP VARCHAR2(20);
+SELECT * FROM EMP_ALTER;
+
+
+-- RENAME : 열 이름 을 변경
+ALTER TABLE EMP_ALTER RENAME COLUMN HP TO TEL;
+
+-- MODIFY : 열의 자료형을 변경
+ALTER TABLE EMP_ALTER MODIFY EMPNO NUMBER(5);
+
+-- DROP: 열 삭제
+ALTER TABLE EMP_ALTER DROP COLUMN TEL;
+
+--테이블 이름 변경
+RENAME EMP_ALTER TO EMP_RENAME;
+SELECT * FROM EMP_RENAME;
+DESC EMP_RENAME;
+
+-- 테이블 데이터를 삭제 TRUNCATE
+SELECT * FROM EMP_RENAME;
+TRUNCATE TABLE EMP_RENAME;
+
+CREATE TABLE MEMBER(
+    ID CHAR(8),
+    NAME VARCHAR2(10),
+    ADDR VARCHAR2(50),
+    NATION CHAR(4),
+    EMAIL VARCHAR2(50),
+    AGE NUMBER(7,2)
+);
+ALTER TABLE MEMBER ADD BIGO VARCHAR2(20);
+DESC MEMBER;
+
+ALTER TABLE MEMBER MODIFY BIGO VARCHAR2(30);
+ALTER TABLE MEMBER RENAME COLUMN BIGO TO REMARK;
 
