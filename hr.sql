@@ -330,6 +330,87 @@ where e.department_id = d.department_id and d.department_name = 'Executive';
 
 
 
+create table indexTBL as select distinct first_name,last_name,hire_date from employees;
+
+select * from indexTBL;
+
+--인덱스 생성 전 검색 방식: full
+select * from indexTBL where first_name='Jack';
+
+--인덱스 생성
+create index idx_indexTBL_firstname on indexTBL(first_name);
+
+--인덱스 생성 후 검색 방식: index 검색(Range scan)
+select * from indexTBL where first_name='Jack';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     
